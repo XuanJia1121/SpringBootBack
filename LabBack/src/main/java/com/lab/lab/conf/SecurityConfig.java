@@ -13,8 +13,6 @@ import com.lab.lab.service.AccessDeniedService;
 import com.lab.lab.service.AuthFailService;
 import com.lab.lab.service.AuthService;
 import com.lab.lab.service.AuthSuccessService;
-import com.lab.lab.service.LogoutService;
-import com.lab.lab.service.LogoutSucService;
 
 @Configuration
 @EnableWebSecurity
@@ -28,24 +26,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private AuthFailService authFailService;
 	@Autowired
-	private LogoutSucService logoutSucService;
-	@Autowired
 	private AuthService authService;
-	@Autowired
-	private LogoutService logoutService;
+
 	/*
 	 * Exception Handle
 	 */
 	@Autowired
 	private AccessDeniedService accessDeniedService;
-	
-	/*
-	 * OAuth2 
-	 */
-//	@Autowired
-//	private GoogleLoginFailService googleLoginFailService;
-//	@Autowired
-//	private GoogleLoginSuccessService googleLoginSuccessService;
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -65,18 +52,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	         .passwordParameter("password")
 	         .successHandler(authSuccessService)
 	         .failureHandler(authFailService);
-	     
-	     http
-	     	 .logout()
-	         .logoutUrl("/auth/logout.action")
-	         .addLogoutHandler(logoutService)
-	         .logoutSuccessHandler(logoutSucService);
-	     
-//	     http
-//	         .oauth2Login()
-//	         .successHandler(googleLoginSuccessService)
-//	         .failureHandler(googleLoginFailService)
-//	         .defaultSuccessUrl("http://localhost:8080/");
 	     
 	     http
          	.exceptionHandling().accessDeniedHandler(accessDeniedService);

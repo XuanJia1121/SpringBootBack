@@ -14,9 +14,6 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lab.lab.dto.AuthRequest;
-import com.lab.lab.dto.ResponseDto;
-import com.lab.lab.enums.ResponseEnum;
-import com.lab.lab.utils.ResponseUtil;
 
 @Service
 public class AuthSuccessService implements AuthenticationSuccessHandler {
@@ -33,13 +30,7 @@ public class AuthSuccessService implements AuthenticationSuccessHandler {
 		req.setUsername(user.getUsername());
 		req.setPassword(user.getPassword());
 		req.setToken(jWTService.generateToken(req));
-		//rtn
-		ResponseDto responseDto = new ResponseDto();
-		responseDto.setCode(ResponseEnum.LOGIN_SUC.getCode());
-		responseDto.setMsg(ResponseEnum.LOGIN_SUC.getMsg());
-		responseDto.setData(objectMapper.writeValueAsString(req));
-		String dataStr = objectMapper.writeValueAsString(responseDto);
-		ResponseUtil.writeResponse(response,dataStr);
-		request.getSession().setAttribute(String.format("%s_USER_INFO",user.getUsername()),dataStr);
+		//return
+
 	}
 }

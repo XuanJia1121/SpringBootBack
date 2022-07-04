@@ -12,9 +12,6 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lab.lab.dto.ResponseDto;
-import com.lab.lab.enums.ResponseEnum;
-import com.lab.lab.utils.ResponseUtil;
 
 @Service
 public class AccessDeniedService implements AccessDeniedHandler {
@@ -25,11 +22,6 @@ public class AccessDeniedService implements AccessDeniedHandler {
 	@Override
 	public void handle(HttpServletRequest request, HttpServletResponse response,
 			AccessDeniedException accessDeniedException) throws IOException, ServletException {
-		//rtn
-		ResponseDto responseDto = new ResponseDto();
-		responseDto.setCode(ResponseEnum.ACCESS_DENIED.getCode());
-		responseDto.setMsg(ResponseEnum.ACCESS_DENIED.getMsg());
-		responseDto.setData(accessDeniedException.getMessage());
-		ResponseUtil.writeResponse(response,objectMapper.writeValueAsString(responseDto));
+		//return
 	}
 }

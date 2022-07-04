@@ -2,7 +2,6 @@ package com.lab.lab.conf;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -38,16 +37,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		 http
 	         .authorizeRequests()
-	         .antMatchers(HttpMethod.POST,"/noAuth/**").permitAll()
-	         .antMatchers(HttpMethod.GET,"/auth/googinLogin").permitAll()
-	         .antMatchers(HttpMethod.GET,"/test/**").permitAll()
+	         .antMatchers("/test/**").permitAll()
 	         .anyRequest().authenticated()
 	         .and().cors()
 	         .and().csrf().disable();
 		 
 	     http
 	         .formLogin()
-         	 .loginProcessingUrl("/auth/login.action")
+         	 .loginProcessingUrl("/login")
 	         .usernameParameter("username")
 	         .passwordParameter("password")
 	         .successHandler(authSuccessService)

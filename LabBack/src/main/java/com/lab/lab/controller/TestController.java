@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lab.lab.annotation.JwtAuth;
 import com.lab.lab.enums.ResponseEnum;
 import com.lab.lab.utils.ResponseUtil;
 
@@ -18,10 +17,9 @@ public class TestController {
 	@Autowired
 	private ResponseUtil responseUtil;
 	
-	@JwtAuth
 	@GetMapping("/test")
 	public void test(HttpServletResponse response) throws Exception {
-		responseUtil.writeResponse(response,responseUtil.rtnDto(ResponseEnum.FAIL.getCode(), ResponseEnum.FAIL.getMsg(),"fail"));
+		responseUtil.writeResponse(response,responseUtil.genDto(ResponseEnum.FAIL.getCode(), ResponseEnum.FAIL.getMsg(),"fail"));
 	}
 	
 }

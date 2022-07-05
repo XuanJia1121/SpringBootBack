@@ -25,7 +25,7 @@ public class Interceptor implements HandlerInterceptor {
 		if (jwtAuth == null) {
 			return true;			
 		} else {
-			responseUtil.writeResponse(response,responseUtil.rtnDto(ResponseEnum.FAIL.getCode(), ResponseEnum.FAIL.getMsg(),"fail"));
+			responseUtil.writeResponse(response,responseUtil.genDto(ResponseEnum.FAIL.getCode(), ResponseEnum.FAIL.getMsg(),"fail"));
 			return false;
 		}
 	}

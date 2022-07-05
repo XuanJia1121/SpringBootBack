@@ -17,18 +17,18 @@ public class ResponseUtil {
 	@Autowired
 	private ObjectMapper objectMapper;
 	
-	public void writeResponse(HttpServletResponse response,String data) throws IOException {
+	public void writeResponse(HttpServletResponse response,ResponseDto data) throws IOException {
 		response.setHeader("Access-Control-Allow-Credentials","true");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json;charset=utf-8");
-		response.getWriter().print(data);
+		response.getWriter().print(objectMapper.writeValueAsString(data));
 	}
 	
-	public String rtnDto(String code,String msg,Object data) throws JsonProcessingException {
+	public ResponseDto genDto(String code,String msg,Object data) throws JsonProcessingException {
 		ResponseDto responseDto = new ResponseDto();
 		responseDto.setCode(code);
 		responseDto.setMsg(msg);
 		responseDto.setData(objectMapper.writeValueAsString(data));
-		return objectMapper.writeValueAsString(responseDto);
+		return responseDto;
 	}
 }

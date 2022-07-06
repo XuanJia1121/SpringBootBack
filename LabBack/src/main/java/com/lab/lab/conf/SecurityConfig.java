@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import com.lab.lab.encode.UserPasswordEncoder;
 import com.lab.lab.service.AccessDeniedService;
 import com.lab.lab.service.AuthFailService;
-import com.lab.lab.service.AuthService;
+import com.lab.lab.service.SecurityAuthService;
 import com.lab.lab.service.AuthSuccessService;
 
 @Configuration
@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private AuthFailService authFailService;
 	@Autowired
-	private AuthService authService;
+	private SecurityAuthService authService;
 
 	/*
 	 * Exception Handle

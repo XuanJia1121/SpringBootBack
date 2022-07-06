@@ -14,7 +14,7 @@ import com.lab.lab.domain.UserDomain;
 import com.lab.lab.enums.ResponseEnum;
  
 @Service
-public class AuthService implements UserDetailsService {
+public class SecurityAuthService implements UserDetailsService {
 
 	@Autowired
 	private UserService userService;

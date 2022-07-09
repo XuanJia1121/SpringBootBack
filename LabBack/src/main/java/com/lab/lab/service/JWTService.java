@@ -9,7 +9,7 @@ import javax.security.auth.message.AuthException;
 
 import org.springframework.stereotype.Service;
 
-import com.lab.lab.dto.AuthRequest;
+import com.lab.lab.dto.AuthUser;
 import com.lab.lab.enums.ResponseEnum;
 
 import io.jsonwebtoken.Jwts;
@@ -21,7 +21,7 @@ public class JWTService {
 	private final String KEY = "XuanLabKey";
 	private final long EXPIRATION_TIME = 1 * 60 * 1000;
 
-	public String generateToken(AuthRequest request) {
+	public String generateToken(AuthUser request) {
 
 		Map<String, Object> claims = new HashMap<>();
 		claims.put("userName", request.getUsername());

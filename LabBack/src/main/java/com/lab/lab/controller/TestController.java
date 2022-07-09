@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lab.lab.enums.ResponseEnum;
+import com.lab.lab.dto.ResponseDto;
 import com.lab.lab.utils.ResponseUtil;
 
 @RequestMapping("/test")
@@ -18,8 +18,8 @@ public class TestController {
 	private ResponseUtil responseUtil;
 	
 	@GetMapping("/test")
-	public void test(HttpServletResponse response) throws Exception {
-		responseUtil.writeResponse(response,responseUtil.genDto(ResponseEnum.FAIL.getCode(), ResponseEnum.FAIL.getMsg(),"fail"));
+	public ResponseDto test(HttpServletResponse response) throws Exception {
+		return responseUtil.genDto("200","測試","12345");
 	}
 	
 }

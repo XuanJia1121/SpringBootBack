@@ -19,7 +19,7 @@ public class TestController {
 	
 	@GetMapping("/test")
 	public ResponseDto test(HttpServletResponse response) throws Exception {
-		throw new Exception("測試");
+		return responseUtil.genDto("", "","經過filter");
 	}
 	
 }

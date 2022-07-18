@@ -16,7 +16,7 @@ public class ExceptionHandlerAdvice {
 	
 	@ExceptionHandler(Exception.class)
 	public ResponseDto exceptionHandle(Exception e) throws Exception {
+		System.out.println(e.getStackTrace());
 		return responseUtil.genDto(ResponseEnum.FAIL.getCode(),ResponseEnum.FAIL.getMsg(),e.getMessage());
 	}
-	
 }

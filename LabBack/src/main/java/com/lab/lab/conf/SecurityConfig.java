@@ -6,12 +6,15 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
+import com.lab.lab.Interceptor.AuthorizationCheckFilter;
 import com.lab.lab.encode.UserPasswordEncoder;
 import com.lab.lab.service.AccessDeniedService;
 import com.lab.lab.service.AuthFailService;
-import com.lab.lab.service.SecurityAuthService;
 import com.lab.lab.service.AuthSuccessService;
+import com.lab.lab.service.SecurityAuthService;
 
 @Configuration
 @EnableWebSecurity
@@ -33,6 +36,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private AccessDeniedService accessDeniedService;
 	
+	@Autowired
+	private AuthorizationCheckFilter authorizationCheckFilter;
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		 http
@@ -41,6 +47,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	         .anyRequest().authenticated()
 	         .and().cors()
 	         .and().csrf().disable();
+		 
+		 http
+		 	.sessionManagement()
+		 	.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+	     http
+	     	.addFilterBefore(authorizationCheckFilter, BasicAuthenticationFilter.class);
 		 
 	     http
 	         .formLogin()

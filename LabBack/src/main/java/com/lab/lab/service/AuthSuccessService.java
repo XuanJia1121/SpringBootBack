@@ -13,7 +13,6 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lab.lab.dto.AuthUser;
 
 @Service
 public class AuthSuccessService implements AuthenticationSuccessHandler {
@@ -26,11 +25,6 @@ public class AuthSuccessService implements AuthenticationSuccessHandler {
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 		User user = (User) authentication.getPrincipal();
-		AuthUser req = new AuthUser();
-		req.setUsername(user.getUsername());
-		req.setPassword(user.getPassword());
-		req.setToken(jWTService.generateToken(req));
-		//return
-
+		
 	}
 }

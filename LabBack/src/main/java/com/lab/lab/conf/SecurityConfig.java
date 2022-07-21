@@ -56,13 +56,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		 	.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 	     http
-	     	.addFilterBefore(authorizationCheckFilter, BasicAuthenticationFilter.class);
+	     	.addFilterBefore(authorizationCheckFilter,BasicAuthenticationFilter.class);
 		 
 	     http
 	        .formLogin();
 	     
 	     http
-	     	.addFilterAt(checkJsonAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+	     	.addFilterAt(checkJsonAuthenticationFilter(),UsernamePasswordAuthenticationFilter.class);
 	     
 	     http
          	.exceptionHandling().accessDeniedHandler(accessDeniedService);

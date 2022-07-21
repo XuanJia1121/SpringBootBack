@@ -12,19 +12,26 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lab.lab.dto.AuthUser;
+import com.lab.lab.dto.ResponseDto;
+import com.lab.lab.enums.ResponseEnum;
+import com.lab.lab.utils.ResponseUtil;
 
 @Service
 public class AuthSuccessService implements AuthenticationSuccessHandler {
 	
 	@Autowired
-	private ObjectMapper objectMapper;
+	private ResponseUtil responseUtil;
 	@Autowired
 	private JWTService jWTService;
 	
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 		User user = (User) authentication.getPrincipal();
-		
+		AuthUser authUser = new AuthUser();
+		authUser.setUsername(user.getUsername());
+		authUser.setToken(jWTService.generateToken(authUser));
+		ResponseDto responseDto = responseUtil.genDto(ResponseEnum.LOGIN_SUC.getCode(),ResponseEnum.LOGIN_SUC.getMsg(),authUser);
+		responseUtil.writeResponse(response,responseDto);
 	}
 }

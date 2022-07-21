@@ -25,7 +25,7 @@ public class SecurityAuthService implements UserDetailsService {
 			UserDomain user = userService.selectByName(username);
 			return new User(user.getUsername(),user.getPassword(),Collections.emptyList());
 		} else {
-			throw new UsernameNotFoundException(ResponseEnum.AUTH_FAIL.getMsg());
+			throw new UsernameNotFoundException(ResponseEnum.LOGIN_FAIL.getMsg());
 		}
 	} 
 }

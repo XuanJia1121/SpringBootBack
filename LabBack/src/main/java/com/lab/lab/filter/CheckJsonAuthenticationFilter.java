@@ -22,9 +22,10 @@ public class CheckJsonAuthenticationFilter extends UsernamePasswordAuthenticatio
 
 	public static final String SPRING_SECURITY_FORM_PASSWORD_KEY = "password";
 	
+	private final String method = "POST";
+	
 	private boolean postOnly = true;
 	
-	private final String method = "POST";
 	
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {

@@ -59,9 +59,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	     	.addFilterBefore(authorizationCheckFilter, BasicAuthenticationFilter.class);
 		 
 	     http
-	         .formLogin();
+	        .formLogin();
 	     
-	     http.addFilterAt(checkJsonAuthenticationFilter(),UsernamePasswordAuthenticationFilter.class);
+	     http
+	     	.addFilterAt(checkJsonAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 	     
 	     http
          	.exceptionHandling().accessDeniedHandler(accessDeniedService);
@@ -80,7 +81,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		filter.setAuthenticationSuccessHandler(authSuccessService);
 		filter.setAuthenticationFailureHandler(authFailService);
 		filter.setFilterProcessesUrl("/login");
-		//這句很關鍵，重用WebSecurityConfigurerAdapter配置的AuthenticationManager，不然要自己組裝AuthenticationManager
+		//重用WebSecurityConfigurerAdapter配置的AuthenticationManager，不然要自己組裝AuthenticationManager
 		filter.setAuthenticationManager(authenticationManagerBean());
 		return filter;
 	}
